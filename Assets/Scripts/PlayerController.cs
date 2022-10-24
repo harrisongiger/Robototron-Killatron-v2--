@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float moveSpeed;
+    Rigidbody rb;
+    Vector3 myInput;
+    Vector3 moveVelocity;
+
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        myInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        moveVelocity = myInput * moveSpeed;
+    }
+
+    void FixedUpdate()
+    {
+        rb.velocity = moveVelocity;
     }
 }
