@@ -9,6 +9,7 @@ public class CameraMovement : MonoBehaviour
     public GameObject Player;
     public float CamYPos;
     public float CamZPos;
+    float yrotation;
 
     void Start()
     {
@@ -17,7 +18,8 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        
+        //yrotation = transform.position.x;
+
         if (transform.position.x <= -25)
         {
             transform.position = new Vector3(-25, CamYPos, CamZPos);
@@ -29,5 +31,14 @@ public class CameraMovement : MonoBehaviour
         {
             transform.position = new Vector3(Player.transform.position.x, CamYPos, CamZPos);
         }
+
+        if (Input.GetKey(KeyCode.T))
+        {
+            yrotation += Time.deltaTime;
+            transform.rotation = Quaternion.Euler(transform.rotation.x, yrotation, transform.rotation.z);
+        }
+        
+            transform.rotation = Quaternion.Euler(0, Input.GetAxis("Horizontal"), 0);
+        
     }
 }
